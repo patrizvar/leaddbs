@@ -80,7 +80,9 @@ db = matfile([dfold,'fMRI',filesep,cname,filesep,'AllX.mat'], 'Writable', false)
 connMat = zeros(length(roiID));
 
 for i=1:length(roiID)
-    for j=i:length(roiID)
+    for j=1:length(roiID)
+        disp(['rows: ',int2str(i),'.'])
+        disp(['columns: ', int2str(j), '.'])
         % First read a larger block from connectome X matrix since ranges
         % for MatFile object must increase in equally spaced intervals
         rowBlockInd = roiInd{i}(1):roiInd{i}(end);

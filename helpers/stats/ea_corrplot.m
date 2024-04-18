@@ -171,7 +171,7 @@ else
         g.geom_point();
         g.set_color_options(colorOptions{:});
     else
-        g.set_color_options('chroma', 0, 'lightness', 30);
+        g.set_color_options('map', [179 173 165]/255, 'lightness', 10);
     end
 end
 
@@ -292,7 +292,7 @@ elseif isempty(group2) && ~isempty(group1)
 end
 
 set(g.results.geom_point_handle, 'MarkerSize', 7);
-set(g.results.geom_point_handle, 'MarkerEdgeColor', 'w');
+set(g.results.geom_point_handle, 'MarkerEdgeColor', 'None');
 
 
 function pstr = getPstr(p, prefix)

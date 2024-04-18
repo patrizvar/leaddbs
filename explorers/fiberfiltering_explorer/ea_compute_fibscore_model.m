@@ -1,4 +1,4 @@
-function [Ihat,Ihat_train_global,val_struct,actualimprovs] = ea_compute_fibscore_model(numTestIt,adj_scaler, obj, fibsval, Ihat, Ihat_train_global, patientsel, training, test, Iperm)
+function [Ihat,Ihat_train_global,val_struct,actualimprovs] = ea_compute_fibscore_model(numTestIt,adj_scaler, obj, fibsval, Ihat, Ihat_train_global, patientsel, training, test, Iperm, hem)
 
     if obj.useExternalModel == true
         S = load(obj.ExternalModelFile);
@@ -16,7 +16,8 @@ function [Ihat,Ihat_train_global,val_struct,actualimprovs] = ea_compute_fibscore
             return     
         end
 
-        vals_connected = cell(size(S.vals_all,1),size(S.vals_all,2));
+%         vals_connected = cell(size(S.vals_all,1),size(S.vals_all,2));
+        vals_connected = cell(size(S.vals_all,1));
         for voter = 1:size(vals_connected,1)
             for side=1:size(vals_connected,2)
                 try
@@ -29,7 +30,7 @@ function [Ihat,Ihat_train_global,val_struct,actualimprovs] = ea_compute_fibscore
                             end
                         otherwise
                             if size(S.vals_all,2) == 2
-                                vals_connected{voter,side} = S.vals_all{voter,side}(obj.results.(ea_conn2connid(obj.connectome)).connFiberInd_VAT{side});
+                                vals_connected{voter,side} = S.vals_all{voter,hem}(obj.results.(ea_conn2connid(obj.connectome)).connFiberInd_VAT{side});
                             else
                                 vals_connected{voter,side} = S.vals_all{voter,1}(obj.results.(ea_conn2connid(obj.connectome)).connFiberInd_VAT{side});
                             end
@@ -102,7 +103,8 @@ function [Ihat,Ihat_train_global,val_struct,actualimprovs] = ea_compute_fibscore
     if size(obj.responsevar,2)>1
         lateral_score = true;
     else
-        lateral_score = false;
+%         lateral_score = false;
+        lateral_score = true;
     end
     if obj.CleartuneOptim
        lateral_score = false;

@@ -229,7 +229,7 @@ for sub=1:numsub % iterate across subjects
                         else
                             usemethod='euclidean';
                         end                                     
-                        thiscorr(:,run)=-pdist2(stc, r{run}.gmtc(maskuseidx,:),usemethod)';
+                        thiscorr(:,run)=1-pdist2(stc, r{run}.gmtc(maskuseidx,:),usemethod)';
 
                 end
             else

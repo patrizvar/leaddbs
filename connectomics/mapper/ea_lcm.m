@@ -162,9 +162,9 @@ switch modality
                 bbfile = [ea_space,'bb.nii'];
             end
 
-            stimParams = ea_regexpdir(vatdir, 'stimparameters\.mat$', 0);
-            load(stimParams{1}, 'S');
-            modelLabel = ea_simModel2Label(S.model);
+%             stimParams = ea_regexpdir(vatdir, 'stimparameters\.mat$', 0);
+%             load(stimParams{1}, 'S');
+            modelLabel = ea_simModel2Label('OSS-DBS (Butenko 2020)');
 
             seedFile = [vatdir, subPrefix, '_sim-', vtaType, '_model-', modelLabel, '_seed-dMRI.nii'];
             if ~isfile(seedFile)
@@ -227,9 +227,9 @@ switch modality
                 seedLabel = 'fMRI';
             end
 
-            stimParams = ea_regexpdir(vatdir, 'stimparameters\.mat$', 0);
-            load(stimParams{1}, 'S');
-            modelLabel = ea_simModel2Label(S.model);
+%             stimParams = ea_regexpdir(vatdir, 'stimparameters\.mat$', 0);
+%             load(stimParams{1}, 'S');
+            modelLabel = ea_simModel2Label('OSS-DBS (Butenko 2020)');
 
             seedFile = [vatdir, subPrefix, '_sim-', vtaType, '_model-', modelLabel, '_seed-', seedLabel, '.nii'];
             % if ~isfile(seedFile)
