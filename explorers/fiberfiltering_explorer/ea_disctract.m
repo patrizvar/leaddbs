@@ -670,7 +670,7 @@ classdef ea_disctract < handle
             end
         end
 
-        function [Improvement, Ihat, actualimprovs, val_struct] = crossval(obj, cvp, Iperm, shuffle, silent)
+        function [Improvement, Ihat, actualimprovs, val_struct] = crossval(obj, cvp, Iperm, shuffle, silent, hem)
             if ~exist('silent','var')
                 silent=0;
             end
@@ -809,7 +809,7 @@ classdef ea_disctract < handle
                 % now compute Ihat for the true 'test' left out
                 % updates Ihat(test)
                 if ~exist('Iperm', 'var') || isempty(Iperm)
-                    [Ihat, Ihat_train_global, val_struct{c}, actualimprovs] = ea_compute_fibscore_model(c, obj.adj_scaler, obj, fibsval, Ihat, Ihat_train_global, patientsel, training, test);
+                    [Ihat, Ihat_train_global, val_struct{c}, actualimprovs] = ea_compute_fibscore_model(c, obj.adj_scaler, obj, fibsval, Ihat, Ihat_train_global, patientsel, training, test, [], hem);
                 else
                     [Ihat, Ihat_train_global, val_struct{c}, actualimprovs] = ea_compute_fibscore_model(c, obj.adj_scaler, obj, fibsval, Ihat, Ihat_train_global, patientsel, training, test, Iperm);
                 end
@@ -1246,7 +1246,7 @@ classdef ea_disctract < handle
             obj.drawobject=rd;
         end
 
-        function draw(obj,vals,fibcell,usedidx) %for cv live visualize
+        function draw(obj,vals,fibcell,usedidx, hem) %for cv live visualize
             %function draw(obj,vals,fibcell)
 
             % re-define plainconn (since we do not store it)
@@ -1337,6 +1337,7 @@ classdef ea_disctract < handle
                 end
 
                 vals_connected = cell(size(S.vals_all,1),size(S.vals_all,2)); % always iterate both sides
+%                 vals_connected=cell(size(S.vals_all,1));
                 for voter = 1:size(vals_connected,1)
                     for side=1:size(vals_connected,2)
                         try
@@ -1349,7 +1350,7 @@ classdef ea_disctract < handle
                                     end
                                 otherwise
                                     if size(S.vals_all,2) == 2
-                                        vals_connected{voter,side} = S.vals_all{voter,side}(obj.results.(ea_conn2connid(obj.connectome)).connFiberInd_VAT{side});
+                                        vals_connected{voter,side} = S.vals_all{voter,hem}(obj.results.(ea_conn2connid(obj.connectome)).connFiberInd_VAT{side});
                                     else
                                         vals_connected{voter,side} = S.vals_all{voter,1}(obj.results.(ea_conn2connid(obj.connectome)).connFiberInd_VAT{side});
                                     end
