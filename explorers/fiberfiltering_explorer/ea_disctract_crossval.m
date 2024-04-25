@@ -134,7 +134,8 @@ switch strategy
         % Construct cvp struct
         cvp.training{1} = ismember(tractset.customselection, training);
         cvp.test{1} = ismember(tractset.customselection, test);
-        [I, Ihat]=tractset.crossval(cvp);
+        hem=2;
+        [I, Ihat]=tractset.crossval(cvp, [], 0, 0, hem);
         cvs = 'imported_model';
         sel = test;
     case 'Custom (Cohorts)'
