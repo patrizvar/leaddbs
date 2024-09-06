@@ -350,37 +350,13 @@ classdef ea_networkmapping < handle
                     % load external model, and assign vals from the
                     % external model.
                     S = load(obj.ExternalModelFile);
-                if obj.useExternalModel == true && ~strcmp(obj.ExternalModelFile, 'None')
-                    % load external model, and assign vals from the
-                    % external model.
-                    S = load(obj.ExternalModelFile);
                     if obj.cvlivevisualize
-                        [vals] = S.model_vals;
                         [vals] = S.model_vals;
                         obj.draw(vals);
                         drawnow;
                     else
                         [vals] = S.model_vals;
-                    end
-                else
-                    if ~exist('Iperm', 'var')
-                        if obj.cvlivevisualize
-                            [vals] = ea_networkmapping_calcstats(obj, patientsel(training));
-                            obj.draw(vals);
-                            drawnow;
-                        else
-                            [vals] = ea_networkmapping_calcstats(obj, patientsel(training));
-                        end
-                    else
-                        if obj.cvlivevisualize
-                            [vals] = ea_networkmapping_calcstats(obj, patientsel(training), Iperm);
-                            obj.draw(vals);
-                            drawnow;
-                        else
-                            [vals] = ea_networkmapping_calcstats(obj, patientsel(training), Iperm);
-                        end
-                        [vals] = S.model_vals;
-                    end
+                    end            
                 else
                     if ~exist('Iperm', 'var')
                         if obj.cvlivevisualize
