@@ -10,6 +10,7 @@ classdef ea_sweetspot < handle
         negvisible = 0 % sourspot visible
 
         efieldthreshold = 200
+        nanthreshold = 0 % all values below this threshold are discarded when calculating stats
         statlevel = 'VTAs' % stats metric to use, 1 = active coordinates, 2 = efields, 3 = vtas
         stattest = 'T-Test';
         stat0hypothesis = 'Zero';
