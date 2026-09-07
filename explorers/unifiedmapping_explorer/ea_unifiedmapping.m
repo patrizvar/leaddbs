@@ -32,7 +32,9 @@ classdef ea_unifiedmapping < handle
         predictionmodel = 'Linear'; % type of glm used to fit fiber values to actual scores
         showsignificantonly = 0
         alphalevel = 0.05
-        multcompstrategy = 'FDR'; % could be 'Bonferroni'
+        multcompstrategy = 'FDR'; % could be 'Bonferroni', 'Uncorrected', 'Permutation Threshold (Uncorr)', or 'Permutation Threshold (max-statistics)'
+        multcompNperm = 1000 % number of shuffles used by the permutation-based multcompstrategy options (see ea_unified_permutation_nulldist.m / ea_unified_permutation_threshold.m)
+        multcompmaxworkers = 3 % cap on parpool workers for the permutation-threshold parfor loop, if Parallel Computing Toolbox is available
         subscore
         explorerdrawn
         results = struct
